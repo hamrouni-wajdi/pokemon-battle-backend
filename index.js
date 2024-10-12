@@ -16,6 +16,7 @@ app.get("/api",(req,res)=>{
 
 
 app.post("/api/pokemons/:id/favorites", PokemonController.addToFavorites);
+app.delete("/api/pokemons/:id/favorites", PokemonController.removeFromFavorites);
 app.post('/api/pokemons',PokemonController.createPokemon);
 app.get("/api/pokemons", PokemonController.getAllPokemons);
 app.get("/api/pokemons/favorites", PokemonController.getFavoritesPokemons);

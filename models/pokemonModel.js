@@ -31,6 +31,10 @@ const PokemonModel = {
     async addToFavorite(pokemonID){
         let {rows} = await db.query(`INSERT INTO favorite_pokemon(pokemon_id) VALUES($1)`,[pokemonID]);
         return rows[0]; 
+    },
+    async removeFromFavorite(pokemonId){
+        let {rows,rowCount} = await db.query(`DELETE FROM favorite_pokemon WHERE pokemon_id=$1`,[pokemonId]);
+            return rowCount > 0;
     }
 }
 module.exports = PokemonModel;

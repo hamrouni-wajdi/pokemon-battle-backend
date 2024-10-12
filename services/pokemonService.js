@@ -24,6 +24,10 @@ const PokemonService = {
         }
         let addedToFavorite = await PokemonModel.addToFavorite(id);
         return addedToFavorite;
+    },
+    async removeFromFavorites(id){
+        let result = await PokemonModel.removeFromFavorite(id);
+        return result;
     }
 }
 

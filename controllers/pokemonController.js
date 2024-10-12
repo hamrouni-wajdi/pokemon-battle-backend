@@ -41,6 +41,19 @@ const PokemonController = {
             console.error("Error adding to favorites Pokemon:", error.message);
             res.status(500).json({ message: "An error occurred while adding to favorites Pokemons" });
         }
+    },
+    async removeFromFavorites(req,res){
+        try{
+            let result = await PokemonService.removeFromFavorites(req.params.id);
+            if(!result){
+                res.status(404).json({message:"record not found"});
+            }
+            res.status(200).json({message:"Pokemon removed from favorites"})
+         }
+         catch(error){
+            console.error("Error removing pokemon from favorites:", error.message);
+            res.status(500).json({ message: "An error occurred while  removing pokemon from favorites" });
+         }
     }
 }
 
