@@ -4,14 +4,17 @@ const app = express();
 const dotenv = require("dotenv");
 const cors = require("cors");
 const db = require("./config/database");
+const PokemonController = require("./controllers/pokemonController");
 dotenv.config();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
-app.get("/",(req,res)=>{
-    res.send("api working")
+app.get("/api",(req,res)=>{
+    res.send(" pokemons api working")
 })
+
+app.post('/api/pokemons',PokemonController.createPokemon);
 
 
 
