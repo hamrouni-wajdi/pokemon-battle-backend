@@ -16,7 +16,7 @@ const PokemonModel = {
             await this.createPokemon(pokemon);
         }
     },
-    async getAllPokemons(){
+    async getPokemons(){
         let {rows,rowCount} = await db.query(`SELECT * FROM pokemon`);
         return {rows,rowCount}
     }

@@ -7,6 +7,11 @@ const PokemonService = {
                 throw new Error('Error while creating pokemon');
             }
             return newPokemon;
+    },
+    async getPokemons(){
+        let pokemons = await PokemonModel.getPokemons()
+        console.log(" all pokemon from services")
+        return pokemons;
     }
 }
 

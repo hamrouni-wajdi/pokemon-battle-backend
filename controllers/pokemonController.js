@@ -11,6 +11,17 @@ const PokemonController = {
             console.error("Error creating Pokemon:", error.message);
             res.status(500).json({ message: "An error occurred while creating the Pokemon" });
         }
+    },
+    async getAllPokemons(req,res){
+        try{
+            let pokemons = await PokemonService.getPokemons();
+            res.status(200).json(pokemons);
+        }
+        catch(error){
+            console.error("Error getting Pokemon:", error.message);
+            res.status(500).json({ message: "An error occurred while getting Pokemons" });
+        }
+   
     }
 }
 

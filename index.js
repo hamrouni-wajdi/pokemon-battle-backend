@@ -15,6 +15,7 @@ app.get("/api",(req,res)=>{
 })
 
 app.post('/api/pokemons',PokemonController.createPokemon);
+app.get("/api/pokemons", PokemonController.getAllPokemons);
 
 
 
