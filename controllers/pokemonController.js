@@ -21,7 +21,26 @@ const PokemonController = {
             console.error("Error getting Pokemon:", error.message);
             res.status(500).json({ message: "An error occurred while getting Pokemons" });
         }
-   
+    },
+    async getFavoritesPokemons(req,res){
+        try{
+            let pokemons = await PokemonService.getFavoritePokemons();
+            res.status(200).json(pokemons);
+        }
+        catch(error){
+            console.error("Error getting Favorites Pokemon:", error.message);
+            res.status(500).json({ message: "An error occurred while getting Favorites Pokemons" });
+        }
+    },
+    async addToFavorites(req,res){
+        try{
+            let favPokemon = await PokemonService.addToFavorite(req.params.id);
+            res.status(200).json({message:"added to favorites"});
+        }
+        catch(error){
+            console.error("Error adding to favorites Pokemon:", error.message);
+            res.status(500).json({ message: "An error occurred while adding to favorites Pokemons" });
+        }
     }
 }
 

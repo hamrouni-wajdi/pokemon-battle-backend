@@ -19,6 +19,18 @@ const PokemonModel = {
     async getPokemons(){
         let {rows,rowCount} = await db.query(`SELECT * FROM pokemon`);
         return {rows,rowCount}
+    },
+    async getFavoritePokemons(){
+        let {rows,rowCount} = await db.query(`SELECT * FROM pokemon p join favorite_pokemon f on p.id = f.pokemon_id;`);
+        return {rows,rowCount};
+    },
+    async isFavoritePokemon(pokemonId){
+        let {rows,rowCount} = await db.query(`SELECT * FROM favorite_pokemon WHERE pokemon_id=$1`,[pokemonId]);
+        return rowCount > 0;
+    }, 
+    async addToFavorite(pokemonID){
+        let {rows} = await db.query(`INSERT INTO favorite_pokemon(pokemon_id) VALUES($1)`,[pokemonID]);
+        return rows[0]; 
     }
 }
 module.exports = PokemonModel;
