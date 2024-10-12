@@ -36,3 +36,48 @@ CREATE TABLE IF NOT EXISTS favorite_pokemon (
 -- INSERT INTO weakness (type1, type2, factor) VALUES(1, 3, 0.5);
 -- INSERT INTO weakness (type1, type2, factor) VALUES(2, 3, 2);
 -- INSERT INTO weakness (type1, type2, factor) VALUES(3, 3, 1);
+
+CREATE TABLE IF NOT EXISTS team (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    isComplete BOOLEAN
+);
+
+CREATE TABLE IF NOT EXISTS team_pokemon (
+    team_id INT REFERENCES team(id) ON DELETE CASCADE,
+    pokemon_id INT REFERENCES pokemon(id) ON DELETE CASCADE,
+    PRIMARY KEY (team_id, pokemon_id)
+);
+
+-- ALTER TABLE team
+-- ADD CONSTRAINT unique_team_name UNIQUE (name);
+
+CREATE OR REPLACE FUNCTION insert_team_with_pokemons(team_name VARCHAR, pokemon_ids INT[])
+RETURNS VOID AS $$
+DECLARE
+    team_id INT;
+    num_pokemons INT;
+BEGIN
+    -- Check that the number of Pokémon is exactly 6
+    num_pokemons := array_length(pokemon_ids, 1);
+    IF num_pokemons != 6 THEN
+        RAISE EXCEPTION 'A team must contain exactly 6 Pokémon. Found: %', num_pokemons;
+    END IF;
+
+    -- Insert the team
+    INSERT INTO team (name) 
+    VALUES (team_name)
+    RETURNING id INTO team_id;
+
+    -- Insert each Pokémon into the team_pokemon table
+    FOR i IN 1..num_pokemons LOOP
+        INSERT INTO team_pokemon (team_id, pokemon_id)
+        VALUES (team_id, pokemon_ids[i]);
+    END LOOP;
+
+    -- Optionally return some message or status (currently returns nothing)
+END;
+$$ LANGUAGE plpgsql;
+
+
+
