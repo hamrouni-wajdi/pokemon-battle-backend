@@ -18,6 +18,11 @@ CREATE TABLE IF NOT EXISTS weakness(
      factor REAL
 );
 
+CREATE TABLE favorite_pokemon (
+    pokemon_id INT REFERENCES pokemon(id) ON DELETE CASCADE,
+    PRIMARY KEY (pokemon_id)
+);
+
 -- INSERT INTO pokemon_type(name) VALUES('fire');
 -- INSERT INTO pokemon_type(name) VALUES('water');
 -- INSERT INTO pokemon_type(name) VALUES('grass');
