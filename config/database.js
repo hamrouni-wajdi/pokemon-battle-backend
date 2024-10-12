@@ -2,6 +2,7 @@ const { Client } = require('pg');
 const dotenv = require("dotenv");
 const fs = require('fs');
 const path = require('path');
+const PokemonModel = require("../models/pokemonModel")
 dotenv.config()
 
 const client = new Client({
@@ -20,9 +21,10 @@ const initializeDatabase = async () => {
 
 client.connect()
   .then(async () => {
-    console.log('Connected to PostgreSQL')
-    await initializeDatabase()
+    console.log('Connected to PostgreSQL');
+    await initializeDatabase();
 })
   .catch(err => console.error('Connection error', err.stack));
+ 
 
   module.exports =client;
