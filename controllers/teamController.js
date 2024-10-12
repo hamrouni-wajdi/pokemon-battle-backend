@@ -24,6 +24,18 @@ const TeamController = {
             console.error("Error creating team:", error.message);
             res.status(500).json({ message: "An error occurred while creating team" });  
         }
+    },
+    async getPokemonsInBattle(req,res){
+        let {firstTeamName,secondTeamName} = req.body;
+        try{
+            let teams = await TeamService.getPokemonsInBattle(firstTeamName,secondTeamName);
+            console.log(teams)
+            res.status(200).json({teams});
+        }
+        catch(error){
+            console.error("Error getting teams:", error.message);
+            res.status(500).json({ message: "An error occurred while getting teams" });  
+        }       
     }
 }
 

@@ -23,6 +23,21 @@ const TeamService = {
     async createTeam(teamName){
         let createdTeam = TeamModel.createTeam(teamName);
         return createdTeam;
+    },
+
+    async getPokemonsInBattle(firstTeamName,secondTeamName){
+        if(firstTeamName===secondTeamName){
+            throw new Error('Error getting pokemons teams ! \n two teams must be distinct');
+        }
+        try {
+            let firstTeam  = await TeamModel.getPokemonsInBattle(firstTeamName);
+            let secondTeam  = await TeamModel.getPokemonsInBattle(secondTeamName);
+            return {firstTeam,secondTeam};
+        }
+        catch(error){
+            console.error('Error getting pokemons teams:', error);
+            throw new Error('Error getting pokemons teams');
+        }
     }
 }
 

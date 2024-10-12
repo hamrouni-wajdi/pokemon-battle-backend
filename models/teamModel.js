@@ -33,6 +33,22 @@ const TeamModel = {
     async getTeamByName(teamName){
         let {rows,rowCount} = await db.query(`SELECT * FROM team WHERE name=($1)`,[teamName]);
         return {rows,rowCount}
+    },
+    async getPokemonsInBattle(teamName){
+        try {
+            const query = `
+                SELECT p.*
+                FROM pokemon p
+                JOIN team_pokemon tp ON p.id = tp.pokemon_id
+                JOIN team t ON t.id = tp.team_id
+                WHERE t.name = $1;
+            `;
+            const result = await db.query(query, [teamName]);
+            return result.rows;  // This will return all Pokémon in the specified team
+        } catch (err) {
+            console.error('Error fetching Pokémon by team name:', err);
+            throw err;
+        }
     }
 }
 

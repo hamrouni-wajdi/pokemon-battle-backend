@@ -20,7 +20,8 @@ app.get("/api",(req,res)=>{
 app.post("/api/pokemons/:id/favorites", PokemonController.addToFavorites);
 app.delete("/api/pokemons/:id/favorites", PokemonController.removeFromFavorites);
 app.post("/api/team/populate",TeamController.populateTeam);
-app.post("/api/team",TeamController.createTeam)
+app.post("/api/team",TeamController.createTeam);
+app.post("/api/team/getPokemonsInBattle", TeamController.getPokemonsInBattle)
 app.post('/api/pokemons',PokemonController.createPokemon);
 app.get("/api/pokemons", PokemonController.getAllPokemons);
 app.get("/api/pokemons/favorites", PokemonController.getFavoritesPokemons);
