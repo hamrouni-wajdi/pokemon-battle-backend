@@ -32,7 +32,7 @@ const TeamService = {
         try {
             let firstTeam  = await TeamModel.getPokemonsInBattle(firstTeamName);
             let secondTeam  = await TeamModel.getPokemonsInBattle(secondTeamName);
-            return {firstTeam,secondTeam};
+            return {firstTeam,secondTeam,firstTeamName,secondTeamName};
         }
         catch(error){
             console.error('Error getting pokemons teams:', error);
