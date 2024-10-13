@@ -43,4 +43,4 @@ If you encounter any issues during installation or setup, please check the follo
 - Verify that your Supabase database is accessible from your current network
 - Check if all required dependencies are installed correctly
 
-For additional help, please refer to the project documentation or contact the support team.
+For additional help, please refer to the project documentation or contact me on wajdihamrouni501@gmail.com.
