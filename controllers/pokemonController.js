@@ -54,6 +54,18 @@ const PokemonController = {
             console.error("Error removing pokemon from favorites:", error.message);
             res.status(500).json({ message: "An error occurred while  removing pokemon from favorites" });
          }
+    },
+    async updatePokemon(req,res){
+        let id = req.params.id
+        let data = req.body;
+        try{
+            let result = await PokemonService.updatePokemon(id,data)
+            res.status(200).json(result);
+        }
+        catch(error){
+            console.error("Error updating pokemon:", error.message);
+            res.status(500).json({ message: "An error occurred while updating pokemon" });
+        }
     }
 }
 

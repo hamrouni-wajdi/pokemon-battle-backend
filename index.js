@@ -24,6 +24,7 @@ app.post("/api/team/populate",TeamController.populateTeam);
 app.post("/api/team",TeamController.createTeam);
 app.post("/api/team/getPokemonsInBattle", TeamController.getPokemonsInBattle)
 app.post('/api/pokemons',PokemonController.createPokemon);
+app.post("/api/pokemons/:id",PokemonController.updatePokemon)
 app.get("/api/pokemons", PokemonController.getAllPokemons);
 app.get("/api/pokemons/favorites", PokemonController.getFavoritesPokemons);
 app.post("/api/game/factor",GameController.getFatcor)

@@ -28,6 +28,10 @@ const PokemonService = {
     async removeFromFavorites(id){
         let result = await PokemonModel.removeFromFavorite(id);
         return result;
+    },
+    async updatePokemon(id,data){
+        let result = await PokemonModel.updatePokemon(id,data);
+        return result;
     }
 }
 

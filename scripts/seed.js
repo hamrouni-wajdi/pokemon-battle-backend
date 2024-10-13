@@ -16,3 +16,4 @@ async function populateDatabase(){
         throw error;
     }
 }
+module.exports=populateDatabase

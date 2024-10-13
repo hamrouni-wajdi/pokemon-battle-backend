@@ -2,7 +2,6 @@ const { Client } = require('pg');
 const dotenv = require("dotenv");
 const fs = require('fs');
 const path = require('path');
-const PokemonModel = require("../models/pokemonModel");
 const { Pool } = require('pg');
 dotenv.config()
 

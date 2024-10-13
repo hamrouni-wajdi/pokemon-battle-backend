@@ -1,7 +1,7 @@
 const db = require("../config/database");
 const pokemonData = require("../sampleData/pokemon.json");
 const fs = require("fs");
-const path = require("path")
+const path = require("path");
 
 const PokemonModel = {
     async createPokemon(pokemon){
@@ -35,6 +35,10 @@ const PokemonModel = {
     async removeFromFavorite(pokemonId){
         let {rows,rowCount} = await db.query(`DELETE FROM favorite_pokemon WHERE pokemon_id=$1`,[pokemonId]);
             return rowCount > 0;
+    },
+    async updatePokemon(id,data){
+        let {rows} = await db.query(`UPDATE pokemon SET type=(SELECT id FROM pokemon_type WHERE name = $2), power=$3, life=$4 WHERE id=$1 RETURNING *`,[id,data.type,data.power,data.life]);
+        return rows;
     }
 }
 module.exports = PokemonModel;
