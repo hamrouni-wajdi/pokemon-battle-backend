@@ -1,6 +1,5 @@
 const db = require("../config/database");
-const fs = require("fs");
-const path = require("path");
+
 
 const TeamModel = {
     async createTeam(name){

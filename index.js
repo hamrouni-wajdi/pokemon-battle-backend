@@ -5,7 +5,8 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const db = require("./config/database");
 const PokemonController = require("./controllers/pokemonController");
-const TeamController = require("./controllers/teamController")
+const TeamController = require("./controllers/teamController");
+const GameController = require("./controllers/gameController");
 
 dotenv.config();
 app.use(cors());
@@ -25,7 +26,7 @@ app.post("/api/team/getPokemonsInBattle", TeamController.getPokemonsInBattle)
 app.post('/api/pokemons',PokemonController.createPokemon);
 app.get("/api/pokemons", PokemonController.getAllPokemons);
 app.get("/api/pokemons/favorites", PokemonController.getFavoritesPokemons);
-
+app.post("/api/game/factor",GameController.getFatcor)
 
 app.listen(process.env.PORT, ()=>{
     console.log(`listening on ${process.env.PORT}`)
