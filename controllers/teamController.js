@@ -36,6 +36,17 @@ const TeamController = {
             console.error("Error getting teams:", error.message);
             res.status(500).json({ message: "An error occurred while getting teams" });  
         }       
+    },
+    async getTeamsOrderedByPower(req,res){
+        try{
+            let teams = await TeamService.getTeamsByOrderedPower();
+            console.log(teams)
+            res.status(200).json({teams});
+        }
+        catch(error){
+            console.error("Error getting teams:", error.message);
+            res.status(500).json({ message: "An error occurred while getting teams" });  
+        } 
     }
 }
 

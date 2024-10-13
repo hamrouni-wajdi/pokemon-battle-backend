@@ -64,20 +64,44 @@ BEGIN
         RAISE EXCEPTION 'A team must contain exactly 6 Pokémon. Found: %', num_pokemons;
     END IF;
 
-    -- Insert the team
+    
     INSERT INTO team (name) 
     VALUES (team_name)
     RETURNING id INTO team_id;
 
-    -- Insert each Pokémon into the team_pokemon table
+    
     FOR i IN 1..num_pokemons LOOP
         INSERT INTO team_pokemon (team_id, pokemon_id)
         VALUES (team_id, pokemon_ids[i]);
     END LOOP;
 
-    -- Optionally return some message or status (currently returns nothing)
+    
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION get_teams_ordered_by_power()
+RETURNS TABLE (
+    team_id INT,
+    team_name VARCHAR,
+    total_power INT
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        t.id AS team_id,
+        t.name AS team_name,
+        SUM(p.power)::INT AS total_power 
+    FROM
+        team t
+    JOIN
+        team_pokemon tp ON t.id = tp.team_id
+    JOIN
+        pokemon p ON tp.pokemon_id = p.id
+    GROUP BY
+        t.id, t.name
+    ORDER BY
+        total_power DESC;  
+END;
+$$ LANGUAGE plpgsql;
 
 

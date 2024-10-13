@@ -38,6 +38,16 @@ const TeamService = {
             console.error('Error getting pokemons teams:', error);
             throw new Error('Error getting pokemons teams');
         }
+    },
+
+    async getTeamsByOrderedPower(){
+        try {
+            result = await TeamModel.getTeamsOrderedByPower();
+            return result;
+
+        }catch(error){
+            console.error('Error getting pokemons teams:', error);
+        }
     }
 }
 

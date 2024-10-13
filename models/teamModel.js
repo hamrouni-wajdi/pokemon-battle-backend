@@ -48,7 +48,17 @@ const TeamModel = {
             console.error('Error fetching Pokémon by team name:', err);
             throw err;
         }
+    },
+    async getTeamsOrderedByPower(){
+        try {
+            const result = await db.query('SELECT * FROM get_teams_ordered_by_power();');
+            return result.rows; 
+          } catch (error) {
+            console.error('Error fetching teams ordered by power:', error);
+            throw error; 
+          }
+        }
     }
-}
+
 
 module.exports = TeamModel;
