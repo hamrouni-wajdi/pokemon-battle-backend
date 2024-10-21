@@ -37,3 +37,4 @@ initialize().catch(err => console.error('Database initialization error', err));
 
 module.exports.initialize = initialize;
 module.exports.query = (text, params) => pool.query(text, params);
+module.exports.pool = pool;

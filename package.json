@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "populate":"node ./scripts/seed.js"
+    "populate":"node ./scripts/seed.js",
+    "migrations":"node ./scripts/runMigrations.js"
   },
   "author": "",
   "license": "ISC",
