@@ -35,6 +35,15 @@ const pool = new Pool({
 
 initialize().catch(err => console.error('Database initialization error', err));
 
+async function query(text, params) {
+  const client = await pool.connect();
+  try {
+      const result = await client.query(text, params);
+      return result;
+  } finally {
+      client.release();
+  }
+}
 module.exports.initialize = initialize;
-module.exports.query = (text, params) => pool.query(text, params);
+module.exports.query = query
 module.exports.pool = pool;
