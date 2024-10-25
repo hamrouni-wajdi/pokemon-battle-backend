@@ -7,6 +7,7 @@ const db = require("./config/database");
 const PokemonController = require("./controllers/pokemonController");
 const TeamController = require("./controllers/teamController");
 const GameController = require("./controllers/gameController");
+const UserController = require("./controllers/userController")
 
 dotenv.config();
 app.use(cors());
@@ -17,7 +18,9 @@ app.get("/api",(req,res)=>{
     res.send(" pokemons api working")
 })
 
-
+app.get("/api/users",UserController.getUsers);
+app.post("/api/users",UserController.createUser);
+app.delete("/api/users/:id",UserController.deleteUser);
 app.post("/api/pokemons/:id/favorites", PokemonController.addToFavorites);
 app.delete("/api/pokemons/:id/favorites", PokemonController.removeFromFavorites);
 app.post("/api/teams/populate",TeamController.populateTeam);
